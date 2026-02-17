@@ -1,0 +1,164 @@
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-size: 1.6rem;
+    font-family: 'Roboto', sans-serif;
+    margin: 0%;
+}
+
+.container {
+    margin: 0% 3rem 0% 3rem;
+}
+
+.navbar {
+    background-color: chocolate;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0% 4rem 0% 4rem;
+    border-bottom-left-radius: 0.5rem;
+}
+.nav-options {
+    display: flex;
+    width: auto;
+    gap: 2rem;
+}
+
+.footer {
+    display: flex;
+    /* width: 100%; */
+    padding: 1rem 3rem 1.5rem 3rem;
+    background-color: beige;  
+    text-align: center;     
+}
+.footer div {
+    width: 100%;
+}
+.dev-team {
+    text-align: start;
+    font-family: 'Consolas', 'Monaco', 'Lucida Console', monospace;
+}
+.copyright {
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    font-weight: 700;
+}
+
+.title-website * {
+    text-align: center;
+    margin: 1rem;
+}
+
+.logo-app {
+    padding: 1.5rem;
+}
+.logo-app img {
+    width: 5rem;
+}
+
+.form-buscar-movie {
+    display: flex;
+    flex-wrap: wrap;
+}
+.form-buscar-movie input {
+    font-size: 1.4rem;
+    margin: 0% 1rem 0% 0%;
+    padding: 0.7rem;
+}
+.form-buscar-movie select {
+    border-radius: 0.3rem;
+}
+.form-buscar-movie button {
+    background-color: lightblue;
+    border-radius: 0.3rem;
+    padding: 0.7rem 1.2rem;
+}
+.form-buscar-movie button:hover {
+    background-color: brown;
+}
+
+
+
+.container-top-10 {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    width: 100%;
+    padding: 1rem;
+    border-top: 0.5rem solid green;
+}
+
+.card-movie {
+    padding: 1rem;
+    border: 0.2rem solid gainsboro;
+    border-radius: 0.2rem;
+    width: 20rem;
+}
+.card-movie-info {
+    padding-top: 1rem;
+}
+#title {
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 0%;
+}
+#sinopsis {
+    margin: 0%;
+}
+#movie-sinopsis {
+    margin: 0.8rem;
+    margin-left: 0.2rem;
+}
+
+#movie-detalles-btn {
+    display: flex;
+    padding: 0.7rem 1rem;
+    margin: 2rem auto 1rem auto;
+    border-radius: 0.5rem;
+    border: 0.2 solid rgb(200, 200, 200);
+    background-color: rgb(35, 192, 35);
+}
+#movie-detalles-btn:hover {
+    background-color: greenyellow;
+}
+.card-movie img {
+    width: 5rem;
+    display: flex;
+    margin: 0% auto;
+}
+
+#link-login {
+   text-decoration: none;
+   color: black; 
+   padding: 0.7rem 1.5rem;
+   border: 0.2rem solid black;
+   border-radius: 0.3rem;
+   background-color: aquamarine;
+}
+#link-login:hover {
+    background-color: blueviolet;
+}
+
+.card-r {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+
+}
+
+.left img {
+    display: flex;
+    margin: auto;
+    width: 30rem;
+}
+
+.pl {
+    display: flex;
+    flex-direction: column;
+    font-size: x-large;
+    font-weight: bold;
+}
