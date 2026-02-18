@@ -8,10 +8,8 @@ body {
     margin: 0%;
 }
 
-.container {
-    margin: 0% 3rem 0% 3rem;
-}
 
+/* CSS Navbar -------------------- */
 .navbar {
     background-color: chocolate;
     display: flex;
@@ -21,12 +19,37 @@ body {
     padding: 0% 4rem 0% 4rem;
     border-bottom-left-radius: 0.5rem;
 }
+
 .nav-options {
     display: flex;
     width: auto;
     gap: 2rem;
 }
 
+.logo-app {
+    padding: 1.5rem;
+}
+.logo-app img {
+    width: 5rem;
+}
+
+#link-login {
+   text-decoration: none;
+   color: black; 
+   padding: 0.7rem 1.5rem;
+   border: 0.2rem solid black;
+   border-radius: 0.3rem;
+   background-color: aquamarine;
+}
+#link-login:hover {
+    background-color: blueviolet;
+}
+
+
+/* ---------- CSS Navbar end ----------*/
+
+
+/* CSS Footer -------------------- */
 .footer {
     display: flex;
     /* width: 100%; */
@@ -37,10 +60,14 @@ body {
 .footer div {
     width: 100%;
 }
+
+/* CSS de Footer nombres */
 .dev-team {
     text-align: start;
     font-family: 'Consolas', 'Monaco', 'Lucida Console', monospace;
 }
+
+/* CSS de Footer copyright */
 .copyright {
     display: flex;
     align-items: end;
@@ -48,18 +75,21 @@ body {
     font-weight: 700;
 }
 
+
+/* ---------- CSS Footer end ----------*/
+
+/* CSS Contenedor principal -------------------- */
+.container {
+    margin: 0% 3rem 0% 3rem;
+}
+
+/* css titulo del sitio web y descripcion*/
 .title-website * {
     text-align: center;
     margin: 1rem;
 }
 
-.logo-app {
-    padding: 1.5rem;
-}
-.logo-app img {
-    width: 5rem;
-}
-
+/* css form buscar pelicula*/
 .form-buscar-movie {
     display: flex;
     flex-wrap: wrap;
@@ -81,40 +111,60 @@ body {
     background-color: brown;
 }
 
-
-
+/* css contenedor de cards */
 .container-top-10 {
+    display: inline-flex;
+    overflow: scroll;
+    overflow-x: auto;
+    gap: 2rem;
+    width: 100%;
+    max-height: 40rem;
+    padding: 1rem;
+    border-top: 0.5rem solid green;
+}
+/* .container-top-10 {
     display: flex;
     flex-wrap: wrap;
     gap: 2rem;
     width: 100%;
     padding: 1rem;
     border-top: 0.5rem solid green;
-}
+} */
 
-.card-movie {
+/* css card de peliculas y series */
+.card-top {
     padding: 1rem;
     border: 0.2rem solid gainsboro;
     border-radius: 0.2rem;
-    width: 20rem;
+    min-width: 20rem;
 }
-.card-movie-info {
+.card-top-info {
     padding-top: 1rem;
 }
-#title {
+
+/* elementos de las cards multimedia top*/
+.card-top img {
+    width: 5rem;
+    display: flex;
+    margin: 0% auto;
+}
+
+.title-card-top {
     font-weight: 700;
     text-align: center;
     margin-bottom: 0%;
 }
-#sinopsis {
+
+.label-sinopsis-card-top {
     margin: 0%;
 }
-#movie-sinopsis {
+
+.sinopsis-card-top {
     margin: 0.8rem;
     margin-left: 0.2rem;
+    font-weight: 200;
 }
-
-#movie-detalles-btn {
+.btn-card-top {
     display: flex;
     padding: 0.7rem 1rem;
     margin: 2rem auto 1rem auto;
@@ -122,43 +172,92 @@ body {
     border: 0.2 solid rgb(200, 200, 200);
     background-color: rgb(35, 192, 35);
 }
-#movie-detalles-btn:hover {
+.movie-detalles-btn:hover {
     background-color: greenyellow;
 }
-.card-movie img {
-    width: 5rem;
-    display: flex;
-    margin: 0% auto;
-}
 
-#link-login {
-   text-decoration: none;
-   color: black; 
-   padding: 0.7rem 1.5rem;
-   border: 0.2rem solid black;
-   border-radius: 0.3rem;
-   background-color: aquamarine;
-}
-#link-login:hover {
-    background-color: blueviolet;
-}
 
-.card-r {
+
+
+.card-contenido-detalles {
     display: flex;
-    gap: 2rem;
     align-items: center;
-
+    padding: 1rem;
+    border-bottom: 0.3rem solid gold
 }
 
-.left img {
+.card-detalles-left p{
+    margin: 1rem;
+}
+.card-detalles-left img {
     display: flex;
     margin: auto;
-    width: 30rem;
+    width: 22rem;
 }
 
-.pl {
+.card-detalles-right {
+    padding: 1rem;
+    padding-left: 2rem;
+    display: flex;  
+    flex-direction: column;
+    margin-bottom: auto;
+}
+.card-detalles-right p {
+    margin: 0.5rem;
+}
+
+.btn-ver-contenido {
+    background-color: azure;
+    display: flex;
+    margin: 2rem auto 1rem auto;
+    padding: 0.7rem 1.7rem;
+    border-radius: 0.4rem;
+    font-size: 1.5rem;
+    align-items: center;
+}
+.btn-ver-contenido:hover {
+    background-color: bisque;
+}
+
+.title-contenido {
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+/* CSS de templates */
+
+/* tmpl contenido relacionado */
+.contenido-relacionado {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.card-contenido-relacionado {
     display: flex;
     flex-direction: column;
-    font-size: x-large;
-    font-weight: bold;
+    width: 25rem;
+    border: 0.2rem solid gainsboro;
+    border-radius: 0.3rem;
+}
+.card-contenido-relacionado img {
+    width: 100%;
+}
+.card-title-contenido-relacionado {
+    text-align: center;
+    font-weight: 600;
+    font-size: 1.8rem;
+    margin: 1rem;
+}
+.card-info-contenido-relacionado p{
+    font-weight: 100;
+    font-size: 1.6rem;
+    margin: 1rem;
+}
+.btn-ver-detalles {
+    display: flex;
+    font-size: 1.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 0.4rem;
+    margin: auto auto 1rem auto;
+    background-color: antiquewhite;
 }
