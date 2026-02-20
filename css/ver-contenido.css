@@ -1,0 +1,92 @@
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-size: 1.6rem;
+    margin: 0%;
+    font-family: 'Roboto', sans-serif;
+}
+
+.container-ver-contenido {
+    width: 100%;
+    height: 100%;
+}
+
+.container-video {
+    background-color: aliceblue;
+    width: 100%;
+    height: 50rem;
+}
+.container-video video {
+    width: 100%;
+    height: auto;
+}
+
+.info-contenido {
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 1.7rem;
+    margin: auto 5rem;
+    
+}
+.info-left, .info-right {
+    flex: 1 1 300px; /* parametros flex-grow flex-shrink flex-basis*/
+    min-width: 50%;
+}
+
+.info-left {
+    width: 55%;
+}
+.info-left #tag-sinopsis {
+    margin-bottom: 1rem;
+}
+.info-left #sinopsis {
+    text-align: justify;
+    margin: auto 2rem auto 2rem;
+    font-style: italic;
+    line-height: 1.5;
+    font-weight: 100;
+    color: rgb(65, 65, 65);
+}
+.info-right {
+    width: 45%;
+}
+
+
+/* CSS Footer -------------------- */
+.footer {
+    display: flex;
+    /* width: 100%; */
+    margin: 0.5rem auto 0.5rem auto;
+    padding: 0.5rem 3rem 0.5rem 3rem;
+    background-color: beige;  
+    text-align: center;     
+}
+.footer div {
+    width: 100%;
+}
+
+/* CSS de Footer nombres */
+.dev-team {
+    text-align: start;
+    font-family: 'Consolas', 'Monaco', 'Lucida Console', monospace;
+}
+
+/* CSS de Footer copyright */
+.copyright {
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    font-weight: 700;
+}
+
+.contactos {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+
+/* 

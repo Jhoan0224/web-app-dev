@@ -1,7 +1,5 @@
 // variables del DOM
 const div_container_index = document.getElementById("container");
-const API_URL = "https://api.imdbapi.dev"
-
 
 const listaMultimedia = [{
     img: "https://m.media-amazon.com/images/S/pv-target-images/ae4816cade1a5b7f29787d0b89610132c72c7747041481c6619b9cc3302c0101.jpg",
@@ -132,70 +130,53 @@ export function cargarDatosApp() {
 
 // functions render contenido top ----------
 export function renderContenidoTop(listaContenidoTop, SECCIONES_TOP, CANTIDAD_TOP) {
+    let contadorCards = 0;
 
-    // obtener todos lo titulos
-    console.log("calling api");
-    fetch(`${API_URL}/titles`)
-        .then(data => {return data.json()})
-        .then(data => {
-        console.log("data.titles");
-        const listaMultimedia = data.titles;
-        
-        let contadorCards = 0;
+    for (let seccion of SECCIONES_TOP) {
+        // filtrar por tipo de contenido para cada seccion
+        let contenidoTop = listaContenidoTop.filter(content => (content.tipo === seccion.id))
+        console.log(seccion)
+        // crear grupo de cards para cada seccion
+        for (let content of contenidoTop) {
 
+            if (contadorCards >= CANTIDAD_TOP) break; 
 
-        for (let seccion of SECCIONES_TOP) {
-            // filtrar por tipo de contenido para cada seccion
-            let contenidoTop = listaMultimedia.filter(content => (content.type == seccion.id))
-            // crear grupo de cards para cada seccion
+            /* crear elementos de las card*/
+            const div_card = document.createElement("div");
+            const div_card_info = document.createElement("div");
+            const img_card = document.createElement("img");
+            const p_title = document.createElement("p");
+            const p_label_sinopsis = document.createElement("p");
+            const p_sinopsis = document.createElement("p");
+            const btn_card_access = document.createElement("button");
 
-            for (let content in contenidoTop) {
+            /* agregamos sus clases de css */
+            div_card.classList.add("card-top");
+            div_card_info.classList.add("card-top-info");
+            p_label_sinopsis.classList.add("label-sinopsis-card-top");
+            p_sinopsis.classList.add("sinopsis-card-top");
+            btn_card_access.classList.add("btn-card-top");
+            
+            /* agregamos el contendo a dicho card */
+            img_card.src = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZhb_fM6ZgrWqfLhzRP838s48bds1cHW1F8Q&s';
+            p_title.innerText = content.title;
+            p_label_sinopsis.innerText = "Sinopsis";
+            p_sinopsis.innerText = content.sinopsis;
+            btn_card_access.innerText = 'Detalles';
 
-                if (contadorCards >= CANTIDAD_TOP) break; 
+            /* agregamos id relacionado a la pelicula */
+            btn_card_access.addEventListener("click", (event) => renderContenidoDetalles(event, content.title));
 
-                /* crear elementos de las card*/
-                const div_card = document.createElement("div");
-                const div_card_info = document.createElement("div");
-                const img_card = document.createElement("img");
-                const p_title = document.createElement("p");
-                const p_label_sinopsis = document.createElement("p");
-                const p_sinopsis = document.createElement("p");
-                const btn_card_access = document.createElement("button");
+            /* emsamblar contenedores */ 
+            div_card_info.append(p_label_sinopsis, p_sinopsis, btn_card_access);
+            div_card.append(img_card, p_title, div_card_info);
 
-                /* agregamos sus clases de css */
-                div_card.classList.add("card-top");
-                div_card_info.classList.add("card-top-info");
-                p_label_sinopsis.classList.add("label-sinopsis-card-top");
-                p_sinopsis.classList.add("sinopsis-card-top");
-                btn_card_access.classList.add("btn-card-top");
-                
-                /* agregamos el contendo a dicho card */
-                img_card.src = contenidoTop[content].primaryImage.url;
-                p_title.innerText = contenidoTop[content].primaryTitle;
-                p_label_sinopsis.innerText = "Sinopsis";
-                p_sinopsis.innerText = contenidoTop[content].plot;
-                btn_card_access.innerText = 'Detalles';
-
-                let id = contenidoTop[content].id
-                /* agregamos id relacionado a la pelicula */
-                btn_card_access.addEventListener("click", (event) => renderContenidoDetalles(event, id));
-
-                /* emsamblar contenedores */ 
-                div_card_info.append(p_label_sinopsis, p_sinopsis, btn_card_access);
-                div_card.append(img_card, p_title, div_card_info);
-
-                // agregar al DOM visual
-                seccion.div_container.append(div_card);
-                contadorCards ++;
-            }
-            contadorCards = 0;
-            contenidoTop = []
+            // agregar al DOM visual
+            seccion.div_container.append(div_card);
+            contadorCards ++;
         }
-
-
-            })
-            .catch(erro => console.error(erro)) 
-
+        contadorCards = 0;
+    }
 }
 
 export function renderResultBusqueda(listaMultimedia) {
@@ -224,35 +205,25 @@ export function renderResultBusqueda(listaMultimedia) {
     div_container_index.appendChild(div_card);
 }
 
-export function renderContenidoDetalles(event, id) {
+function renderContenidoDetalles(event, idContenido) {
     event.preventDefault();
-    console.log(id);
-  fetch(`${API_URL}/titles/${id}`)
-        .then(data => {return data.json()})
-        .then(data => {
-
-
-        console.log("contenido detales id " + data.id);
-    // const contenidoDetalles = listaMultimedia.find(contenido => contenido.title == idContenido);
-    const contenidoDetalles = data;
+    const contenidoDetalles = listaMultimedia.find(contenido => contenido.title == idContenido);
     div_container_index.innerHTML = "";
 
     let tmpl_contenido_detalles = document.createElement("div");
     let tmpl_contenido_relacionado = document.createElement("div");
     div_container_index.append(tmpl_contenido_detalles, tmpl_contenido_relacionado);
 
-    console.log(contenidoDetalles.stars);
-
     fetch('../templates/contenido-detalles.html')
         .then(tmpl => {return tmpl.text()})
         .then(tmpl => {
-            const tmplRender = tmpl.replace("{{img}}", contenidoDetalles.primaryImage.url)
-            .replace("{{title}}", contenidoDetalles.primaryTitle)
-            .replace("{{fechaEstreno}}", contenidoDetalles.startYear)
-            .replace("{{director}}", contenidoDetalles.directors[0].displayName)
-            .replace("{{actores}}", contenidoDetalles.stars.map(act => act.displayName))
-            .replace("{{sinopsis}}", contenidoDetalles.plot)
-            .replace("{{idContenido}}", contenidoDetalles.id);
+            const tmplRender = tmpl.replace("{{img}}", contenidoDetalles.img)
+            .replace("{{title}}", contenidoDetalles.title)
+            .replace("{{fechaEstreno}}", 'dec 2025')
+            .replace("{{director}}", "Carlos del toro")
+            .replace("{{actores}}", "Carlos, Juan, Pepito y Victor")
+            .replace("{{sinopsis}}", contenidoDetalles.sinopsis)
+            .replace("{{idContenido}}", contenidoDetalles.title);
             
             tmpl_contenido_detalles.innerHTML = tmplRender.trim();
 
@@ -262,31 +233,30 @@ export function renderContenidoDetalles(event, id) {
     tmpl_contenido_relacionado.classList.add("contenido-relacionado");
 
 
-    // for (let content of listaMultimedia) {
+    for (let content of listaMultimedia) {
         
-    //     const div_card_contenido = document.createElement("div");
-    //     const img_card = document.createElement("img");
-    //     const div_card_info = document.createElement("div");
-    //     const p_title = document.createElement("p");
-    //     const p_pelicula_fecha = document.createElement("p");
-    //     const p_duracion = document.createElement("p");
-    //     const btn_ver_detalles = document.createElement("btn");
+        const div_card_contenido = document.createElement("div");
+        const img_card = document.createElement("img");
+        const div_card_info = document.createElement("div");
+        const p_title = document.createElement("p");
+        const p_pelicula_fecha = document.createElement("p");
+        const p_duracion = document.createElement("p");
+        const btn_ver_detalles = document.createElement("btn");
 
         
-    //     div_card_contenido.classList.add("card-contenido-relacionado");
-    //     p_title.classList.add("card-title-contenido-relacionado");
-    //     div_card_info.classList.add("card-info-contenido-relacionado");
+        div_card_contenido.classList.add("card-contenido-relacionado");
+        p_title.classList.add("card-title-contenido-relacionado");
+        div_card_info.classList.add("card-info-contenido-relacionado");
 
-    //     img_card.src = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZhb_fM6ZgrWqfLhzRP838s48bds1cHW1F8Q&s';
-    //     p_title.innerText = content.title;
-    //     p_pelicula_fecha.innerText = "Pelicula, Dic 2025";
-    //     p_duracion.innerText = "2h 50min";
-    //     btn_ver_detalles.innerText = "Ver detalles";
+        img_card.src = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZhb_fM6ZgrWqfLhzRP838s48bds1cHW1F8Q&s';
+        p_title.innerText = content.title;
+        p_pelicula_fecha.innerText = "Pelicula, Dic 2025";
+        p_duracion.innerText = "2h 50min";
+        btn_ver_detalles.innerText = "Ver detalles";
 
-    //     div_card_info.append(p_pelicula_fecha, p_duracion, btn_ver_detalles);
-    //     div_card_contenido.append(img_card, p_title, div_card_info);
+        div_card_info.append(p_pelicula_fecha, p_duracion, btn_ver_detalles);
+        div_card_contenido.append(img_card, p_title, div_card_info);
         
-    //     tmpl_contenido_relacionado.append(div_card_contenido);    
-    // }
+        tmpl_contenido_relacionado.append(div_card_contenido);    
+    }
 }
-)}

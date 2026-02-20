@@ -11,9 +11,13 @@
         <a class="logo-app" href="/">
             <img src="https://assets.about.me/background/users/d/b/m/dbmovie_1656396948_303.jpg" alt="">
         </a>
-        <form class="form-buscar-movie" id="form-buscar-contenido">
-            <select name="tipoContenido" id="select-tipo-contenido">
+        <form class="form-buscar-movie" onsubmit="buscarContenido(event)">
+            <select name="tipoContenido" id="SelectTipoContenido">
                 <option value="1">Todas</option>
+                <option value="2">Documentales</option>
+                <option value="3">Peliculas</option>
+                <option value="4">Series</option>
+                <option value="5">Cartoon</option>
             </select>
            <input type="text" name="txtBuscar" id="txtBuscar" required autocomplete="off" placeholder="Busca una peli..."> 
            <button type="submit">Buscar...</button>
