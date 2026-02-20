@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/ver-contenido.css">
+    <link rel="stylesheet" href="../css/style.css">
+
+    <title>Practica1 WebApp</title>
+</head>
+<body>
+    <nav class="navbar">
+        <a class="logo-app" href="/">
+            <img src="https://assets.about.me/background/users/d/b/m/dbmovie_1656396948_303.jpg" alt="">
+        </a>
+        <form class="form-buscar-movie" onsubmit="buscarContenido(event)">
+            <select name="tipoContenido" id="SelectTipoContenido">
+                <option value="1">Todas</option>
+                <option value="2">Documentales</option>
+                <option value="3">Peliculas</option>
+                <option value="4">Series</option>
+                <option value="5">Cartoon</option>
+            </select>
+           <input type="text" name="txtBuscar" id="txtBuscar" required autocomplete="off" placeholder="Busca una peli..."> 
+           <button type="submit">Buscar...</button>
+        </form>
+        <div class="nav-options">
+            <a id="link-login" href="/">Log In</a>
+            <select>
+                <option value="1">Tema Dark</option>
+                <option value="2">Tema Light</option>
+            </select>
+        </div>
+    </nav>
+    <div class="container">
+        <h2>Interestelar</h2>
+
+        <video controls class="container-video">
+            <source type="video/mp4" src="../media/video.mp4">
+            <source type="video/mp4" src="https://media.istockphoto.com/id/1251458087/video/man-puts-fingers-down-lake-kayaking-against-backdrop-of-golden-sunset-unity-harmony-nature.mp4?s=mp4-640x640-is&k=20&c=3_eNR0LUd0UBwxHYg14gGWW48a2jyHgwEHwTRHL6qDs=">
+        </video>
+
+        <div class="info-contenido">
+            <div class="info-left">
+                <p>Interestelar, Diciembre 2014</p>
+                <!-- <p>Fecha de estreno: </p> -->
+                <p id="tag-sinopsis">Sinopsis:</p>
+                <p id="sinopsis">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eum natus molestiae eius perferendis earum, voluptatem dolore praesentium non molestias suscipit, sit adipisci provident quisquam incidunt velit labore? Corporis, voluptatum! Exercitationem!</p>
+            </div>
+            <div class="info-right">
+                <p>Director </p>
+                <p>Elenco Principal </p>
+                <p>Premios principales </p>
+                <p>Genero: Aventura, Duracion 2h 10min</p>
+            </div>
+        </div>
+    </div>
+
+    <footer id="footer" class="footer">
+        <div class="dev-team">
+                <p>Development Team:</p>
+            <p>&bullet; Vannessa Esther Perez Garcia 2023PG603</p>
+            </p>&bullet; Jhoan Alberto Saldaña Contreras 2024SC651</p>
+        </div>
+        <div class="copyright">
+            <p>&copy The Movie DataBase — 2026</p>
+        </div>
+        <div class="contactos">
+            contactos
+        </div>
+    </footer>
+</body>
+</html>

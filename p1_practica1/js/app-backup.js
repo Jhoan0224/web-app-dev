@@ -1,28 +1,24 @@
-import { renderContenidoTop } from "./renderContent.js";
 
-// variables del DOM
+// cargar dinamicamente resultados de busqueda dentro de la app principal
 const div_container_index = document.getElementById("container");
 const div_movies_top = document.getElementById("container-top-movies");
 const div_series_top = document.getElementById("container-top-series");
 const h3_title_resultdo = document.createElement("h3");
 
-// constantes de la app
+// variales de la app
 const CANTIDAD_TOP = 5;
-const CANTIDAD_CONTENIDO_RELACIONADO = 5;
-
 const TIPO_CONTENIDO = {
     pelicula: {id: 'pelicula', nombre: 'Peliculas'},
-    documental: {id: 'documental', nombre: 'Documentales'},
     serie: {id: 'serie', nombre: 'Series'}, 
+    documental: {id: 'documental', nombre: 'Documentales'},
     cartoon: {id: 'cartoon', nombre: 'Cartoon'}
 };
+
 const LIST_SECCIONES_TOP = [ 
     {id: TIPO_CONTENIDO.pelicula.id, div_container: div_movies_top},
     {id: TIPO_CONTENIDO.serie.id, div_container: div_series_top}
 ];
-
-// variable de la app
-const listaMultimedia = [{
+const listaMultimedia = [ {
     img: "https://m.media-amazon.com/images/S/pv-target-images/ae4816cade1a5b7f29787d0b89610132c72c7747041481c6619b9cc3302c0101.jpg",
     title: "Avatar",
     sinopsis: "Un exmarine viaja a Pandora y se involucra en el conflicto entre humanos y nativos.",
@@ -142,27 +138,113 @@ const listaMultimedia = [{
     title: "House of the Dragon",
     sinopsis: "La historia de la casa Targaryen antes de los eventos de Game of Thrones.",
     tipo: "serie"
-}];
+  }];
 
-initApp();
 
-// iniciar la app
-function initApp() {
-    try {
-        // llamar a las api y obtener y guardar los datos
-
-        renderContenidoTop(listaMultimedia, LIST_SECCIONES_TOP, CANTIDAD_TOP);
-
-    } catch (error) {
-        
-    }
-}
-
-// funciones de la app
-function buscarContenido(event) {
+function renderContenidoDetalles2(event, idContenido) {
     event.preventDefault();
-    const {txtBuscar, tipoContenido} = event.target;
+    const contenidoDetalles = listaMultimedia.find(contenido => contenido.title == idContenido);
+    div_container_index.innerHTML = "";
 
-    if (!txtBuscar  || !tipoContenido) return;
-    renderResultBusqueda(listaMultimedia);
+    let tmpl_contenido_detalles = document.createElement("div");
+    let tmpl_contenido_relacionado = document.createElement("div");
+    div_container_index.append(tmpl_contenido_detalles, tmpl_contenido_relacionado);
+
+    fetch('../templates/contenido-detalles.html')
+        .then(tmpl => {return tmpl.text()})
+        .then(tmpl => {
+            const tmplRender = tmpl.replace("{{img}}", contenidoDetalles.img)
+            .replace("{{title}}", contenidoDetalles.title)
+            .replace("{{fechaEstreno}}", 'dec 2025')
+            .replace("{{director}}", "Carlos del toro")
+            .replace("{{actores}}", "Carlos, Juan, Pepito y Victor")
+            .replace("{{sinopsis}}", contenidoDetalles.sinopsis);
+            
+            tmpl_contenido_detalles.innerHTML = tmplRender.trim();
+
+        })
+        .catch(err => console.error('error en template detalles', err));
+    
+    tmpl_contenido_relacionado.classList.add("contenido-relacionado");
+
+
+    for (let content of listaMultimedia) {
+        
+        const div_card_contenido = document.createElement("div");
+        const img_card = document.createElement("img");
+        const div_card_info = document.createElement("div");
+        const p_title = document.createElement("p");
+        const p_pelicula_fecha = document.createElement("p");
+        const p_duracion = document.createElement("p");
+        const btn_ver_detalles = document.createElement("btn");
+
+        
+        div_card_contenido.classList.add("card-contenido-relacionado");
+        p_title.classList.add("card-title-contenido-relacionado");
+        div_card_info.classList.add("card-info-contenido-relacionado");
+
+        img_card.src = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZhb_fM6ZgrWqfLhzRP838s48bds1cHW1F8Q&s';
+        p_title.innerText = content.title;
+        p_pelicula_fecha.innerText = "Pelicula, Dic 2025";
+        p_duracion.innerText = "2h 50min";
+        btn_ver_detalles.innerText = "Ver detalles";
+
+        div_card_info.append(p_pelicula_fecha, p_duracion, btn_ver_detalles);
+        div_card_contenido.append(img_card, p_title, div_card_info);
+        
+        tmpl_contenido_relacionado.append(div_card_contenido);
+    }
+    
 }
+
+function renderContenidoDetalles(idContenido) {
+    const contenidoDetalles = listaMultimedia.find(contenido => contenido.title == idContenido);
+    
+    console.log(contenidoDetalles);
+    
+    /* limpiamos al div container index*/
+    div_container_index.innerHTML = "";
+
+    /* crear la card y sus componentes internos*/
+    const div_contenido_detalles = document.createElement("div");
+    const div_info_left = document.createElement("div");
+    const div_info_right = document.createElement("div");
+    const img_card = document.createElement("img");
+    const p_title_card = document.createElement("p");
+    const p_sinopsis = document.createElement("p");
+    const p_fecha_estreno = document.createElement("p");
+    const p_director = document.createElement("p");
+    const p_actores = document.createElement("p");
+    const btn_ver_video = document.createElement("button");
+
+    /* agregar clases a los elementos */
+    div_contenido_detalles.classList.add("card-contenido-detalles");
+    div_info_left.classList.add("card-detalles-left");
+    div_info_left.classList.add("card-detalles-left");
+    div_info_right.classList.add("card-detalles-right");
+    btn_ver_video.classList.add("btn-ver-contenido");
+
+    /* agregar datos */
+    img_card.src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZhb_fM6ZgrWqfLhzRP838s48bds1cHW1F8Q&s";
+    p_title_card.innerText = contenidoDetalles.title;
+    p_director.innerText = "Director: "+ 'Carlos';
+    p_sinopsis.innerText = "Sinopsis: " + contenidoDetalles.sinopsis;
+    p_fecha_estreno.innerText = 'fecha de lanzamiento Diciembre 2025';
+    p_actores.innerHTML = "Actores principales: " + "Juan, Pepito y Ramon";
+    
+    btn_ver_video.innerText = "Ver";
+    btn_ver_video.addEventListener("click", () => (s));
+    
+    /* aqui llenamos los datos para cada card */
+    div_info_left.append(img_card);
+    div_info_right.append(p_title_card, p_fecha_estreno, p_director, p_actores, p_sinopsis, btn_ver_video);
+    div_contenido_detalles.append(div_info_left, div_info_right);
+
+    /* agregamos al div container index*/
+    div_container_index.appendChild(div_contenido_detalles);
+}
+
+renderContenidoTop(LIST_SECCIONES_TOP, listaMultimedia);
+
+
+

@@ -14,6 +14,7 @@ body {
     background-color: chocolate;
     display: flex;
     flex-wrap: wrap;
+    height: 7rem;
     align-items: center;
     justify-content: space-between;
     padding: 0% 4rem 0% 4rem;
@@ -27,7 +28,7 @@ body {
 }
 
 .logo-app {
-    padding: 1.5rem;
+    padding: 1rem;
 }
 .logo-app img {
     width: 5rem;
